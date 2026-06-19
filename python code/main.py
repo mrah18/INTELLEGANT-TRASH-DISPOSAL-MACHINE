@@ -1,3 +1,6 @@
+
+#dependencies: ultralytics, opencv-python, pyserial
+
 import cv2
 import serial
 import time
@@ -5,8 +8,9 @@ from ultralytics import YOLO
 
 COM_PORT = 'COM9'
 BAUD_RATE = 115200
-CONFIDENCE_THRESHOLD = 0.10
+CONFIDENCE_THRESHOLD = 0.80
 
+# Attempt to connect to ESP32 
 try:
     esp32 = serial.Serial(port=COM_PORT, baudrate=BAUD_RATE, timeout=1)
     time.sleep(2)  
@@ -56,7 +60,7 @@ while True:
             confidence = boxes.conf[0].item()
             detected_name = results[0].names[detected_id].strip().lower()
 
-            # INDENTED ONE LEVEL DEEPER:
+           
             if confidence >= CONFIDENCE_THRESHOLD:
                 if detected_name != current_target:
                     current_target = detected_name
