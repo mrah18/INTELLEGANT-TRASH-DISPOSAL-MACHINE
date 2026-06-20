@@ -18,8 +18,9 @@ try:
 except serial.SerialException:
     print(f"Error: Could not open port {COM_PORT}. Make sure the Serial Monitor is closed.")
     exit()
+# Place the model file in the same directory as this script
 
-model = YOLO(r"C:\projects\Mycode\progromath\EyeOfCat.pt")
+model = YOLO(r"EyeOfCat.pt")
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
